@@ -38,7 +38,7 @@ void swipe(int direction)
 {
   if(direction == UP)
   {
-    for(int j = 0; j < 1; j++)
+    for(int j = 0; j < 4; j++)
     {
       for(int i = 1; i < 4; i++)
       {
@@ -64,8 +64,8 @@ void swipe(int direction)
             }
           }
         }
-        cout << i << endl;
-        printBoard();
+        //cout << i << endl;
+        //printBoard();
       }
     }
   }
@@ -83,7 +83,7 @@ void clearBoard()
 int main()
 {
   clearBoard();
-  //generateBoard();
+  generateBoard();
   board[0][0] = 2;
   board[1][0] = 2;
   board[2][0] = 2;
