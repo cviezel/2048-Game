@@ -34,46 +34,38 @@ void generateBoard()
     }
   }
 }
-void shortSwipe(int direction)
+void swipe(int direction)
 {
   if(direction == UP)
   {
-    for(int i = 3; i > 0; i--)
+    for(int j = 0; j < 1; j++)
     {
-      for(int j = 0; j < 4; j++)
+      for(int i = 1; i < 4; i++)
       {
-        if(board[i-1][j] == 0)
+        for(int k = 3; k > 0; k--)
         {
-          board[i-1][j] = board[i][j];
-          board[i][j] = 0;
+          if(board[k-1][j] == 0)
+          {
+            board[k-1][j] = board[k][j];
+            board[k][j] = 0;
+          }
         }
-        else if(board[i][j] == board[i-1][j])
+
+        if(board[i-1][j] == board[i][j] && board[i][j] != 0)
         {
-          board[i-1][j] *= 2;
+          board[i-1][j] = 2*board[i][j];
           board[i][j] = 0;
+          for(int k = 3; k > 0; k--)
+          {
+            if(board[k-1][j] == 0)
+            {
+              board[k-1][j] = board[k][j];
+              board[k][j] = 0;
+            }
+          }
         }
-      }
-    }
-  }
-}
-void longSwipe(int direction)
-{
-  if(direction == UP)
-  {
-    for(int i = 1; i < 4; i++)
-    {
-      for(int j = 0; j < 4; j++)
-      {
-        if(board[i-1][j] == 0)
-        {
-          board[i-1][j] = board[i][j];
-          board[i][j] = 0;
-        }
-        else if(board[i][j] == board[i-1][j])
-        {
-          board[i-1][j] *= 2;
-          board[i][j] = 0;
-        }
+        cout << i << endl;
+        printBoard();
       }
     }
   }
@@ -95,14 +87,18 @@ int main()
   board[0][0] = 2;
   board[1][0] = 2;
   board[2][0] = 2;
+  board[3][0] = 2;
   printBoard();
-  shortSwipe(1);
+  swipe(1);
   printBoard();
+  /*
   clearBoard();
   board[0][0] = 2;
   board[1][0] = 2;
   board[2][0] = 2;
+  board[3][0] = 2;
   printBoard();
   longSwipe(1);
   printBoard();
+  */
 }
