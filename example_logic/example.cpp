@@ -34,7 +34,7 @@ void generateBoard()
     }
   }
 }
-void generateNewTile()
+void generateNewTile(int direction)
 {
   int openX[16] = {0};
   int openY[16] = {0};
@@ -116,30 +116,35 @@ void swipeUp()
   {
     for(int i = 1; i < 4; i++)
     {
-      for(int k = 3; k > 0; k--)
+      int n = 0;
+      while(n < 3)
       {
-        if(board[k-1][j] == 0)
+        for(int k = 3; k > 0; k--)
         {
-          board[k-1][j] = board[k][j];
-          board[k][j] = 0;
+          if(board[k-1][j] == 0)
+          {
+            board[k-1][j] = board[k][j];
+            board[k][j] = 0;
+          }
         }
+        n++;
       }
       if(board[i-1][j] == board[i][j] && board[i][j] != 0)
       {
         board[i-1][j] = 2*board[i][j];
         board[i][j] = 0;
-      }
-      for(int k = 3; k > 0; k--)
-      {
-        if(board[k-1][j] == 0)
+        for(int k = 3; k > 0; k--)
         {
-          board[k-1][j] = board[k][j];
-          board[k][j] = 0;
+          if(board[k-1][j] == 0)
+          {
+            board[k-1][j] = board[k][j];
+            board[k][j] = 0;
+          }
         }
       }
     }
   }
-  generateNewTile();
+  generateNewTile(UP);
 }
 void swipeDown()
 {
@@ -147,30 +152,35 @@ void swipeDown()
   {
     for(int i = 2; i >= 0; i--)
     {
-      for(int k = 0; k < 3; k++)
+      int n = 0;
+      while(n < 3)
       {
-        if(board[k+1][j] == 0)
+        for(int k = 0; k < 3; k++)
         {
-          board[k+1][j] = board[k][j];
-          board[k][j] = 0;
+          if(board[k+1][j] == 0)
+          {
+            board[k+1][j] = board[k][j];
+            board[k][j] = 0;
+          }
         }
+        n++;
       }
       if(board[i+1][j] == board[i][j] && board[i][j] != 0)
       {
         board[i+1][j] = 2*board[i][j];
         board[i][j] = 0;
-      }
-      for(int k = 0; k < 3; k++)
-      {
-        if(board[k+1][j] == 0)
+        for(int k = 0; k < 3; k++)
         {
-          board[k+1][j] = board[k][j];
-          board[k][j] = 0;
+          if(board[k+1][j] == 0)
+          {
+            board[k+1][j] = board[k][j];
+            board[k][j] = 0;
+          }
         }
       }
     }
   }
-  generateNewTile();
+  generateNewTile(DOWN);
 }
 void swipeLeft()
 {
@@ -178,61 +188,71 @@ void swipeLeft()
   {
     for(int j = 1; j < 4; j++)
     {
-      for(int k = 3; k > 0; k--)
+      int n = 0;
+      while(n < 3)
       {
-        if(board[i][k-1] == 0)
+        for(int k = 3; k > 0; k--)
         {
-          board[i][k-1] = board[i][k];
-          board[i][k] = 0;
+          if(board[i][k-1] == 0)
+          {
+            board[i][k-1] = board[i][k];
+            board[i][k] = 0;
+          }
         }
+        n++;
       }
       if(board[i][j-1] == board[i][j] && board[i][j] != 0)
       {
         board[i][j-1] = 2*board[i][j];
         board[i][j] = 0;
-      }
-      for(int k = 3; k > 0; k--)
-      {
-        if(board[i][k-1] == 0)
+        for(int k = 3; k > 0; k--)
         {
-          board[i][k-1] = board[i][k];
-          board[i][k] = 0;
+          if(board[i][k-1] == 0)
+          {
+            board[i][k-1] = board[i][k];
+            board[i][k] = 0;
+          }
         }
       }
     }
   }
-  generateNewTile();
+  generateNewTile(LEFT);
 }
 void swipeRight()
 {
   for(int i = 0; i < 4; i++)
   {
-    for(int j = 0; j < 3; j++)
+    for(int j = 2; j >= 0; j--)
     {
-      for(int k = 0; k < 3; k++)
+      int n = 0;
+      while(n < 3)
       {
-        if(board[i][k+1] == 0)
+        for(int k = 0; k < 3; k++)
         {
-          board[i][k+1] = board[i][k];
-          board[i][k] = 0;
+          if(board[i][k+1] == 0)
+          {
+            board[i][k+1] = board[i][k];
+            board[i][k] = 0;
+          }
         }
+        n++;
       }
       if(board[i][j+1] == board[i][j] && board[i][j] != 0)
       {
         board[i][j+1] = 2*board[i][j];
         board[i][j] = 0;
-      }
-      for(int k = 2; k >= 0; k--)
-      {
-        if(board[i][k+1] == 0)
+        for(int k = 0; k < 3; k++)
         {
-          board[i][k+1] = board[i][k];
-          board[i][k] = 0;
+          if(board[i][k+1] == 0)
+          {
+            board[i][k+1] = board[i][k];
+            board[i][k] = 0;
+          }
         }
       }
     }
   }
-  generateNewTile();
+  generateNewTile(RIGHT);
 }
 void clearBoard()
 {
@@ -249,14 +269,10 @@ int main()
   clearBoard();
   //generateBoard();
 
-  generateNewTile();
-  generateNewTile();
 
-/*
-  board[3][0] = 2;
-  board[1][0] = 0;
   board[0][0] = 2;
-  */
+  board[0][3] = 2;
+  board[2][0] = 2;
   //board[0][3] = 2;
   printBoard();
 
@@ -274,5 +290,4 @@ int main()
       swipeRight();
     printBoard();
   }
-
 }
