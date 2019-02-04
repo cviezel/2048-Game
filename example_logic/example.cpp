@@ -1,14 +1,10 @@
 #include <iostream>
 #include <cstdlib>
 
-#define UP 1
-#define DOWN 2
-#define LEFT 3
-#define RIGHT 4
-
 using namespace std;
 
 int board[4][4];
+bool winFlag = false;
 
 void printBoard()
 {
@@ -16,7 +12,7 @@ void printBoard()
   {
     for(int j = 0; j < 4; j++)
     {
-      cout << board[i][j] << " ";
+      cout << board[i][j] << "\t";
     }
     cout << "\n";
   }
@@ -34,81 +30,42 @@ void generateBoard()
     }
   }
 }
-void generateNewTile(int direction)
+void generateNewTile()
 {
   int openX[16] = {0};
   int openY[16] = {0};
-  int count = 0;
-  int x;
-  /*
-  if(direction == UP || direction == DOWN)
+  int count = 0; //counts how many open tiles are available
+  for(int i = 0; i < 4; i++)
   {
-    if(direction == UP)
-      x = 3;
-    else if(direction == DOWN)
-      x = 0;
-    for(int i = 0; i < 4; i++)
+    for(int j = 0; j < 4; j++)
     {
-      if(board[x][i] == 0)
+      if(board[i][j] == 0)
       {
-        open[count] = i;
+        openY[count] = i;
+        openX[count] = j;
         count++;
       }
     }
-    if(count > 0) //tile on the opposite side of the swipe is free
-    {
-      int r = rand() % count;
-      board[x][open[r]] = 2;
-    }
   }
-  if(direction == RIGHT || direction == LEFT)
+  if(count != 0) //fill a random tile
   {
-    if(direction == LEFT)
-      x = 3;
-    else if(direction == RIGHT)
-      x = 0;
-    for(int i = 0; i < 4; i++)
-    {
-      if(board[i][x] == 0)
-      {
-        open[count] = i;
-        count++;
-      }
-    }
-    if(count > 0) //tile on the opposite side of the swipe is free
-    {
-      int r = rand() % count;
-      board[open[r]][x] = 2;
-    }
+    int r = rand() % count;
+    cout << "using a random tile at " << openY[r] << " " << openX[r] << endl;
+    board[openY[r]][openX[r]] = 2;
   }
-*/
-  if(count == 0) //no open tiles on opposite side, must use a random tile
+  else
   {
-    for(int i = 0; i < 4; i++)
-    {
-      for(int j = 0; j < 4; j++)
-      {
-        if(board[i][j] == 0)
-        {
-          openY[count] = i;
-          openX[count] = j;
-          count++;
-        }
-      }
-    }
-    if(count != 0) //fill a random tile
-    {
-      int r = rand() % count;
-      cout << "using a random tile at " << openY[r] << " " << openX[r] << endl;
-      board[openY[r]][openX[r]] = 2;
-    }
-    else
-    {
-      cout << "game over" << endl;
-      //game over
-    }
+    cout << "game over" << endl;
+    //game over
   }
-
+}
+void checkWin(int x)
+{
+  if(x == 2048)
+  {
+    cout << "You win!" << endl;
+  }
+  winFlag = true;
 }
 void swipeUp()
 {
@@ -132,6 +89,7 @@ void swipeUp()
       if(board[i-1][j] == board[i][j] && board[i][j] != 0)
       {
         board[i-1][j] = 2*board[i][j];
+        checkWin(board[i-1][j]);
         board[i][j] = 0;
         for(int k = 3; k > 0; k--)
         {
@@ -144,7 +102,7 @@ void swipeUp()
       }
     }
   }
-  generateNewTile(UP);
+  generateNewTile();
 }
 void swipeDown()
 {
@@ -168,6 +126,7 @@ void swipeDown()
       if(board[i+1][j] == board[i][j] && board[i][j] != 0)
       {
         board[i+1][j] = 2*board[i][j];
+        checkWin(board[i+1][j]);
         board[i][j] = 0;
         for(int k = 0; k < 3; k++)
         {
@@ -180,7 +139,7 @@ void swipeDown()
       }
     }
   }
-  generateNewTile(DOWN);
+  generateNewTile();
 }
 void swipeLeft()
 {
@@ -204,6 +163,7 @@ void swipeLeft()
       if(board[i][j-1] == board[i][j] && board[i][j] != 0)
       {
         board[i][j-1] = 2*board[i][j];
+        checkWin(board[i][j-1]);
         board[i][j] = 0;
         for(int k = 3; k > 0; k--)
         {
@@ -216,7 +176,7 @@ void swipeLeft()
       }
     }
   }
-  generateNewTile(LEFT);
+  generateNewTile();
 }
 void swipeRight()
 {
@@ -240,6 +200,7 @@ void swipeRight()
       if(board[i][j+1] == board[i][j] && board[i][j] != 0)
       {
         board[i][j+1] = 2*board[i][j];
+        checkWin(board[i][j+1]);
         board[i][j] = 0;
         for(int k = 0; k < 3; k++)
         {
@@ -252,7 +213,7 @@ void swipeRight()
       }
     }
   }
-  generateNewTile(RIGHT);
+  generateNewTile();
 }
 void clearBoard()
 {
@@ -267,17 +228,16 @@ void clearBoard()
 int main()
 {
   clearBoard();
-  //generateBoard();
 
+  generateNewTile();
+  generateNewTile();
 
-  board[0][0] = 2;
-  board[0][3] = 2;
-  board[2][0] = 2;
-  //board[0][3] = 2;
+  //board[0][0] = 1024;
+  //board[0][1] = 1024;
   printBoard();
 
   char c;
-  while(c != 'e')
+  while(c != 'e' && !winFlag)
   {
     cin >> c;
     if(c == 'w')
