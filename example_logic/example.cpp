@@ -64,8 +64,8 @@ void checkWin(int x)
   if(x == 2048)
   {
     cout << "You win!" << endl;
+    winFlag = true;
   }
-  winFlag = true;
 }
 void swipeUp()
 {
