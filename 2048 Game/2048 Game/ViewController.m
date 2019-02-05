@@ -31,20 +31,31 @@
 @property (weak, nonatomic) IBOutlet UIButton *left;
 @property (weak, nonatomic) IBOutlet UILabel *lwinlose;
 
+@property (nonatomic, strong) NSTimer *timer;
+@property (weak, nonatomic) IBOutlet UILabel *lTime;
+
+
 
 @end
 
 @implementation ViewController
+@synthesize timer;
+@synthesize lTime;
 
 int board[4][4];
 bool winFlag = false;
 bool gameFlag = true;
 UILabel * screen[4][4];
+int timeCount = 0;
+int finalTime = 0;
 
 NSMutableString *s;
 
 - (void)clearBoard{
     _lwinlose.text = @"";
+    lTime.text = @"";
+    timeCount = 0;
+    
     for(int i = 0; i < 4; i++)
     {
         for(int j = 0; j < 4; j++)
@@ -85,19 +96,19 @@ NSMutableString *s;
     }
     if([x.text  isEqual: @"128"]) //128
     {
-        [x setTextColor: [UIColor redColor]];
+        [x setTextColor: [UIColor magentaColor]];
     }
     if([x.text  isEqual: @"256"]) //256
     {
-        [x setTextColor: [UIColor magentaColor]];
+        [x setTextColor: [UIColor redColor]];
     }
     if([x.text  isEqual: @"512"]) //512
     {
-        [x setTextColor: [UIColor greenColor]];
+        [x setTextColor: [UIColor yellowColor]];
     }
     if([x.text  isEqual: @"1024"]) //1024
     {
-        [x setTextColor: [UIColor yellowColor]];
+        [x setTextColor: [UIColor greenColor]];
     }
     if([x.text  isEqual: @"2048"]) //2048
     {
@@ -162,6 +173,7 @@ NSMutableString *s;
     if(x == 2048)
     {
         //cout << "You win!" << endl;
+        finalTime = timeCount;
         winFlag = true;
         gameFlag = false;
         _lwinlose.text = @"You Win!";
@@ -336,7 +348,11 @@ NSMutableString *s;
         [self swipeLeft];
     [self printBoard];
 }
-
+-(void)incrementLabel
+{
+    ++timeCount;
+    [lTime setText:[NSString stringWithFormat:@"Time: %d sec", timeCount]];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -364,6 +380,10 @@ NSMutableString *s;
     [self generateNewTile];
     [self generateNewTile];
     [self printBoard];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        [self performSelectorOnMainThread:@selector(incrementLabel) withObject:nil waitUntilDone:NO];
+    }];
     //[self swipeUp];
     //[self printBoard];
     

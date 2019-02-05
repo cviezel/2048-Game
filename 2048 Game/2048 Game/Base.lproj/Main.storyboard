@@ -150,10 +150,17 @@
                                     <action selector="pressLeft:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QWc-9o-kYv"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZL-Sl-2hx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="win/lose" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZL-Sl-2hx">
                                 <rect key="frame" x="133" y="584" width="108" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timer" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odE-Sm-rLM">
+                                <rect key="frame" x="142" y="28" width="117" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -243,6 +250,7 @@
                         <outlet property="l7" destination="zdA-sk-SLp" id="OCr-4l-2Pl"/>
                         <outlet property="l8" destination="huX-L6-dMY" id="ji7-1Z-Oe4"/>
                         <outlet property="l9" destination="I3N-7n-ype" id="qvJ-bJ-Byh"/>
+                        <outlet property="lTime" destination="odE-Sm-rLM" id="ckD-xh-cVh"/>
                         <outlet property="left" destination="9aq-Ik-iPj" id="5fa-8R-4o9"/>
                         <outlet property="lwinlose" destination="5ZL-Sl-2hx" id="O1x-n4-JFE"/>
                         <outlet property="right" destination="BHr-Uu-vFw" id="q2M-0L-k2B"/>
