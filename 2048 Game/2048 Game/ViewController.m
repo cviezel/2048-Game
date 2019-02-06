@@ -33,6 +33,7 @@
 
 @property (nonatomic, strong) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet UILabel *lTime;
+@property (weak, nonatomic) IBOutlet UIButton *clearBtn;
 
 
 
@@ -66,53 +67,64 @@ NSMutableString *s;
 }
 - (void)colorLabel:(UILabel *)x
 {
+    int red = 255;
     if([x.text  isEqual: @"0"]) //0
     {
-        [x setTextColor: [UIColor whiteColor]];
+        [x setText:@""];
     }
     if([x.text  isEqual: @"2"]) //2
     {
-        [x setTextColor: [UIColor grayColor]];
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"4"]) //4
     {
-        [x setTextColor: [UIColor lightGrayColor]];
+        red -= 20*1;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"8"]) //8
     {
-        [x setTextColor: [UIColor brownColor]];
+        red -= 20*2;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"16"]) //16
     {
-        [x setTextColor: [UIColor purpleColor]];
+        red -= 20*3;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"32"]) //32
     {
-        [x setTextColor: [UIColor blueColor]];
+        red -= 20*4;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"64"]) //64
     {
-        [x setTextColor: [UIColor orangeColor]];
+        red -= 20*5;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"128"]) //128
     {
-        [x setTextColor: [UIColor magentaColor]];
+        red -= 20*6;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"256"]) //256
     {
-        [x setTextColor: [UIColor redColor]];
+        red -= 20*7;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"512"]) //512
     {
-        [x setTextColor: [UIColor yellowColor]];
+        red -= 20*8;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"1024"]) //1024
     {
-        [x setTextColor: [UIColor greenColor]];
+        red -= 20*9;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
     if([x.text  isEqual: @"2048"]) //2048
     {
-        [x setTextColor: [UIColor cyanColor]];
+        red -= 20*10;
+        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
     }
 }
 - (void)printBoard
@@ -348,10 +360,18 @@ NSMutableString *s;
         [self swipeLeft];
     [self printBoard];
 }
+- (IBAction)restartGame:(id)sender {
+    [self clearBoard];
+    [self generateNewTile];
+    [self generateNewTile];
+    [self printBoard];
+    finalTime = 0;
+    timeCount = 0;
+}
 -(void)incrementLabel
 {
     ++timeCount;
-    [lTime setText:[NSString stringWithFormat:@"Time: %d sec", timeCount]];
+    [lTime setText:[NSString stringWithFormat:@"%d sec", timeCount]];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
