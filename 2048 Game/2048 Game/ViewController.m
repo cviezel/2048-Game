@@ -68,7 +68,7 @@ NSMutableString *s;
 {
     if([x.text  isEqual: @"0"]) //0
     {
-        [x setTextColor: [UIColor blackColor]];
+        [x setTextColor: [UIColor whiteColor]];
     }
     if([x.text  isEqual: @"2"]) //2
     {
