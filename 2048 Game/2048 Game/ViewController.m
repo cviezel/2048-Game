@@ -30,10 +30,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *down;
 @property (weak, nonatomic) IBOutlet UIButton *left;
 @property (weak, nonatomic) IBOutlet UILabel *lwinlose;
+@property (weak, nonatomic) IBOutlet UILabel *pauseScreen;
 
 @property (nonatomic, strong) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet UILabel *lTime;
 @property (weak, nonatomic) IBOutlet UIButton *clearBtn;
+@property (weak, nonatomic) IBOutlet UIButton *pauseBtn;
 
 
 
@@ -49,6 +51,7 @@ bool gameFlag = true;
 UILabel * screen[4][4];
 int timeCount = 0;
 int finalTime = 0;
+bool pauseFlag = false;
 
 NSMutableString *s;
 
@@ -370,8 +373,28 @@ NSMutableString *s;
 }
 -(void)incrementLabel
 {
-    ++timeCount;
-    [lTime setText:[NSString stringWithFormat:@"%d sec", timeCount]];
+    if(!pauseFlag)
+    {
+        ++timeCount;
+        [lTime setText:[NSString stringWithFormat:@"%d sec", timeCount]];
+    }
+    
+}
+- (IBAction)pause:(id)sender {
+    if(!pauseFlag) //pausing game
+    {
+        pauseFlag = true;
+        //[sender setTitle:@"Play" forState:UIControlStateNormal];
+        _pauseScreen.hidden = false;
+    }
+    else if(pauseFlag) //unpausing game
+    {
+        pauseFlag = false;
+        //[sender setTitle:@"Pause" forState:UIControlStateNormal];
+        _pauseScreen.hidden = true;
+    }
+    
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

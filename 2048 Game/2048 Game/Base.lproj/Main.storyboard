@@ -156,11 +156,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6U-24-UDZ">
-                                <rect key="frame" x="323" y="55" width="4" height="264"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tyZ-iY-1B4">
                                 <rect key="frame" x="258" y="55" width="4" height="264"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -255,6 +250,33 @@
                                     <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4B7-ZP-6bg"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Paused" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7q-sI-lrH">
+                                <rect key="frame" x="63" y="55" width="264" height="264"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="31"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6U-24-UDZ">
+                                <rect key="frame" x="323" y="55" width="4" height="264"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </imageView>
+                            <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dpad.png" translatesAutoresizingMaskIntoConstraints="NO" id="81n-Hz-mQ9">
+                                <rect key="frame" x="20" y="413" width="141" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwn-Zh-ken">
+                                <rect key="frame" x="254" y="516" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Pause"/>
+                                <connections>
+                                    <action selector="pause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UNJ-i1-HaW"/>
+                                    <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2HY-Ua-exV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.55404964712049398" green="0.24303702202690536" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -281,6 +303,8 @@
                         <outlet property="lTime" destination="odE-Sm-rLM" id="ckD-xh-cVh"/>
                         <outlet property="left" destination="9aq-Ik-iPj" id="5fa-8R-4o9"/>
                         <outlet property="lwinlose" destination="5ZL-Sl-2hx" id="O1x-n4-JFE"/>
+                        <outlet property="pauseBtn" destination="jwn-Zh-ken" id="hng-dQ-msZ"/>
+                        <outlet property="pauseScreen" destination="l7q-sI-lrH" id="7qg-7a-EgF"/>
                         <outlet property="right" destination="BHr-Uu-vFw" id="q2M-0L-k2B"/>
                         <outlet property="up" destination="Huz-YO-hnv" id="ysG-y7-KQD"/>
                     </connections>
@@ -290,4 +314,7 @@
             <point key="canvasLocation" x="-100" y="122.78860569715144"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dpad.png" width="200" height="200"/>
+    </resources>
 </document>
