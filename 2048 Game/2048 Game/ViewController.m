@@ -344,22 +344,22 @@ NSMutableString *s;
     [self generateNewTile];
 }
 - (IBAction)pressUp:(id)sender {
-    if(gameFlag)
+    if(gameFlag && !pauseFlag)
         [self swipeUp];
     [self printBoard];
 }
 - (IBAction)pressRight:(id)sender {
-    if(gameFlag)
+    if(gameFlag && !pauseFlag)
         [self swipeRight];
     [self printBoard];
 }
 - (IBAction)pressDown:(id)sender {
-    if(gameFlag)
+    if(gameFlag && !pauseFlag)
         [self swipeDown];
     [self printBoard];
 }
 - (IBAction)pressLeft:(id)sender {
-    if(gameFlag)
+    if(gameFlag && !pauseFlag)
         [self swipeLeft];
     [self printBoard];
 }
@@ -368,6 +368,7 @@ NSMutableString *s;
     [self generateNewTile];
     [self generateNewTile];
     [self printBoard];
+    NSLog(@"clear button pressed");
     finalTime = 0;
     timeCount = 0;
 }
@@ -381,6 +382,7 @@ NSMutableString *s;
     
 }
 - (IBAction)pause:(id)sender {
+    NSLog(@"pause button pressed");
     if(!pauseFlag) //pausing game
     {
         pauseFlag = true;
@@ -393,9 +395,9 @@ NSMutableString *s;
         //[sender setTitle:@"Pause" forState:UIControlStateNormal];
         _pauseScreen.hidden = true;
     }
-    
-    
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -423,6 +425,7 @@ NSMutableString *s;
     [self generateNewTile];
     [self generateNewTile];
     [self printBoard];
+    NSLog(@"hi");
     
     timer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         [self performSelectorOnMainThread:@selector(incrementLabel) withObject:nil waitUntilDone:NO];
