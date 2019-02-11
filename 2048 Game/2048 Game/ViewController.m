@@ -70,64 +70,19 @@ NSMutableString *s;
 }
 - (void)colorLabel:(UILabel *)x
 {
+    int values[11] = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048};
     int red = 255;
     if([x.text  isEqual: @"0"]) //0
     {
         [x setText:@""];
     }
-    if([x.text  isEqual: @"2"]) //2
+    for(int i = 0; i < 11; i++)
     {
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"4"]) //4
-    {
-        red -= 20*1;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"8"]) //8
-    {
-        red -= 20*2;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"16"]) //16
-    {
-        red -= 20*3;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"32"]) //32
-    {
-        red -= 20*4;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"64"]) //64
-    {
-        red -= 20*5;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"128"]) //128
-    {
-        red -= 20*6;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"256"]) //256
-    {
-        red -= 20*7;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"512"]) //512
-    {
-        red -= 20*8;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"1024"]) //1024
-    {
-        red -= 20*9;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
-    }
-    if([x.text  isEqual: @"2048"]) //2048
-    {
-        red -= 20*10;
-        [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
+        if([x.text isEqual:([NSString stringWithFormat:@"%d", values[i]])])
+        {
+            red -= 20 * i;
+            [x setTextColor: [UIColor colorWithRed:255/255.f green:red/255.f blue:red/255.f alpha:1.0]];
+        }
     }
 }
 - (void)printBoard
@@ -179,7 +134,10 @@ NSMutableString *s;
         winFlag = false;
         gameFlag = false;
         //cout << "game over" << endl;
-        _lwinlose.text = @"You Lose!";
+        _pauseScreen.hidden = false;
+        _pauseScreen.text = @"Game over!";
+        pauseFlag = true;
+        //_lwinlose.text = @"You Lose!";
         //game over
     }
 }
@@ -191,7 +149,11 @@ NSMutableString *s;
         finalTime = timeCount;
         winFlag = true;
         gameFlag = false;
-        _lwinlose.text = @"You Win!";
+        pauseFlag = true;
+        _pauseScreen.hidden = false;
+        _pauseScreen.text = @"You win!";
+        //_lwinlose.text = @"You Win!";
+        
     }
 }
 -(void)swipeUp
@@ -368,6 +330,10 @@ NSMutableString *s;
     [self generateNewTile];
     [self generateNewTile];
     [self printBoard];
+    pauseFlag = false;
+    gameFlag = true;
+    winFlag = false;
+    _pauseScreen.hidden = true;
     NSLog(@"clear button pressed");
     finalTime = 0;
     timeCount = 0;
@@ -383,13 +349,14 @@ NSMutableString *s;
 }
 - (IBAction)pause:(id)sender {
     NSLog(@"pause button pressed");
-    if(!pauseFlag) //pausing game
+    if(!pauseFlag && gameFlag) //pausing game
     {
         pauseFlag = true;
         //[sender setTitle:@"Play" forState:UIControlStateNormal];
+        _pauseScreen.text = @"Paused";
         _pauseScreen.hidden = false;
     }
-    else if(pauseFlag) //unpausing game
+    else if(pauseFlag && gameFlag) //unpausing game
     {
         pauseFlag = false;
         //[sender setTitle:@"Pause" forState:UIControlStateNormal];
