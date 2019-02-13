@@ -329,11 +329,6 @@ NSMutableString *s;
         [self swipeLeft];
     [self printBoard];
 }
-- (IBAction)swipeLeft:(id)sender {
-    NSLog(@"left");
-    [self pressLeft:sender];
-}
-
 
 
 - (IBAction)restartGame:(id)sender {
