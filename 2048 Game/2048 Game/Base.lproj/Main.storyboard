@@ -279,14 +279,19 @@
                                 <rect key="frame" x="234" y="430" width="89" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <state key="normal" backgroundImage="pausebtn"/>
                                 <connections>
                                     <action selector="pause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Uj-99-wg3"/>
+                                    <outletCollection property="gestureRecognizers" destination="Z0P-3z-dsQ" appends="YES" id="edW-i2-Zzj"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.55404964712049398" green="0.24303702202690536" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="f6O-nL-2Bl" appends="YES" id="7nj-5A-hxs"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="clearBtn" destination="WaG-9k-LMY" id="O9B-Zw-fUG"/>
@@ -313,10 +318,34 @@
                         <outlet property="pauseBtn" destination="VAt-iE-opF" id="9TR-Xo-6O1"/>
                         <outlet property="pauseScreen" destination="l7q-sI-lrH" id="7qg-7a-EgF"/>
                         <outlet property="right" destination="BHr-Uu-vFw" id="q2M-0L-k2B"/>
+                        <outlet property="sDown" destination="Tcz-oa-bvV" id="r9D-al-15G"/>
+                        <outlet property="sLeft" destination="UHy-Y8-cyI" id="SeO-yZ-f8Q"/>
+                        <outlet property="sRight" destination="Z0P-3z-dsQ" id="bGl-tI-mEj"/>
+                        <outlet property="sUp" destination="f6O-nL-2Bl" id="2ud-7f-iSM"/>
                         <outlet property="up" destination="Huz-YO-hnv" id="ysG-y7-KQD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="UHy-Y8-cyI">
+                    <connections>
+                        <action selector="swipeLeft:" destination="BYZ-38-t0r" id="PwN-jb-JR3"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="Tcz-oa-bvV">
+                    <connections>
+                        <action selector="swipeDown:" destination="BYZ-38-t0r" id="hRF-pn-edi"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="Z0P-3z-dsQ">
+                    <connections>
+                        <action selector="swipeRight:" destination="BYZ-38-t0r" id="jAo-Gb-glu"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="f6O-nL-2Bl">
+                    <connections>
+                        <action selector="swipe:" destination="BYZ-38-t0r" id="4ml-4e-CAD"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-100" y="122.78860569715144"/>
         </scene>

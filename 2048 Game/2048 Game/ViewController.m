@@ -37,6 +37,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *clearBtn;
 @property (weak, nonatomic) IBOutlet UIButton *pauseBtn;
 
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *sLeft;
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *sDown;
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *sRight;
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *sUp;
 
 
 @end
@@ -325,6 +329,13 @@ NSMutableString *s;
         [self swipeLeft];
     [self printBoard];
 }
+- (IBAction)swipeLeft:(id)sender {
+    NSLog(@"left");
+    [self pressLeft:sender];
+}
+
+
+
 - (IBAction)restartGame:(id)sender {
     [self clearBoard];
     [self generateNewTile];
@@ -369,6 +380,11 @@ NSMutableString *s;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [_sLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    /*[_sRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [_sUp setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    [_sDown setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    */
     screen[0][0] = _l1;
     screen[0][1] = _l2;
     screen[0][2] = _l3;
